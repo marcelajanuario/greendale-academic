@@ -1,18 +1,14 @@
-version: '3'
+version: '3.8'
 
 services:
-  db:
-    image: mysql/mysql-server:8.0
-    command: --innodb-use-native-aio=0
-    container_name: db
-    restart: always
-    tty: true
-    volumes:
-      - ./mysql:/var/lib/mysql:rw
-    user: mysql
-    ports:
-      - "3306:3306"
+  postgres:
+    image: postgres:latest
+    container_name: meu_postgres
     environment:
-      - MYSQL_DATABASE=nodedb
-      - MYSQL_ROOT_PASSWORD=root
-
+      POSTGRES_DB: meu_banco_de_dados
+      POSTGRES_USER: meu_usuario
+      POSTGRES_PASSWORD: <sua_senha>
+    volumes:
+      - ./dados_postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
